@@ -4,8 +4,9 @@ import styles from './style'
 export default class Login extends React.Component {
   state = { email: '', password: '', errorMessage: null }
   handleLogin = () => {
-    // TODO: Firebase stuff...
-    console.log('handleLogin')
+    
+    
+    this.props.navigation.navigate('Loading');
   }
   render() {
     return (
