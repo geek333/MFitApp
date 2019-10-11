@@ -1,41 +1,21 @@
 import React from 'react'
 import { StyleSheet, Text, TextInput, View, Button, TouchableOpacity  } from 'react-native'
 import styles from './style'
-import * as firebase from 'firebase';
+import Firebase from '../common/constants'
 
 export default class signUp extends React.Component {npm 
   state = { email: '', password: '',name:'', errorMessage: null }
 
   handleSignUp = () => {
 
-    data = async () => {
-        const { name, password, email } = this.state;
-    }
+    emailId = this.state.email;
+    pass = this.state.password;
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyC7Xn9kxFAd-0qFRoRbuczWVPVgYd_AadM",
-        authDomain: "mfitapp-7f639.firebaseapp.com",
-        databaseURL: "https://mfitapp-7f639.firebaseio.com",
-        projectId: "mfitapp-7f639",
-        storageBucket: "mfitapp-7f639.appspot.com",
-        messagingSenderId: "940699961246",
-        appId: "1:940699961246:web:9ba602fb588625817cf88f",
-        measurementId: "G-GE1TQTVV4Y"
-      };
-    
-    firebase.initializeApp(firebaseConfig);
-    firebase.database().ref('users').push(
-        {
-            username : '',
-            emailId : '',
-            upwd : ''
-        }
-    ).then(()=>{
-        
-    }).catch((error)=>{
-        console.log(error);
-    })
-   
+    Firebase.auth()
+    .createUserWithEmailAndPassword(emailId, pass)
+    .then(() => this.props.navigation.navigate('Login'))
+    .catch(error => console.log(error))  
+
   }
 
 render() {
@@ -47,25 +27,25 @@ render() {
             {this.state.errorMessage}
           </Text>}
         <TextInput
-          placeholder="Email"
-          autoCapitalize="none"
           style={styles.textInput}
-          onChange={email=>this.setState({email})}
+          autoCapitalize="none"
+          placeholder="Email"
+          onChangeText={email => this.setState({ email })}
           value={this.state.email}
         />
-        <TextInput
-          placeholder="Name"
-          autoCapitalize="none"
+         <TextInput
           style={styles.textInput}
-          onChange={name=>this.setState({name})}
+          autoCapitalize="none"
+          placeholder="Name"
+          onChangeText={name => this.setState({ name })}
           value={this.state.name}
         />
-        <TextInput
+       <TextInput
           secureTextEntry
-          placeholder="Password"
-          autoCapitalize="none"
           style={styles.textInput}
-          onChange={password=>this.setState({password})}
+          autoCapitalize="none"
+          placeholder="Password"
+          onChangeText={password => this.setState({ password })}
           value={this.state.password}
         />
         
