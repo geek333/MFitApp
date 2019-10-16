@@ -3,7 +3,8 @@ export default {
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    
   },
   textInput: {
     height: 40,
@@ -11,7 +12,7 @@ export default {
     width: '90%',
     borderColor: '#9b9b9b',
     borderBottomWidth: 1,
-    marginTop: 8,
+    marginTop: 3,
     marginVertical: 15
   }
 }

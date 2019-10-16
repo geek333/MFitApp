@@ -6,6 +6,7 @@ import Loading from './src/screens/Loading';
 import SignUp from './src/screens/SignUp';
 import Login from './src/screens/Login';
 import Home from './src/screens/Home';
+import Welcome from './src/screens/WelcomeSceenValues'
 import config from './src/common/constants.js';
 
 
@@ -25,6 +26,10 @@ const App = createStackNavigator(
     Home :
     {
       screen : Home
+    },
+    Welcome :
+    {
+      screen : Welcome
     }
   },
   {
