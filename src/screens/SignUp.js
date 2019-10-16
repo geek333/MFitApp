@@ -3,6 +3,7 @@ import { StyleSheet, Text, TextInput, View, Button, TouchableOpacity  } from 're
 import styles from './style'
 import Firebase from '../common/constants'
 
+
 export default class signUp extends React.Component {npm 
   state = { email: '', password: '',name:'', errorMessage: null }
 
@@ -10,10 +11,26 @@ export default class signUp extends React.Component {npm
 
     emailId = this.state.email;
     pass = this.state.password;
+    name = this.state.name;
 
     Firebase.auth()
     .createUserWithEmailAndPassword(emailId, pass)
-    .then(() => this.props.navigation.navigate('Login'))
+    .then(data => {
+      let userId=data.user.uid;
+      console.log(userId);
+      Firebase.database().ref('Users/'+userId).set({
+        email : emailId,
+        uname : name,
+         }).then((data)=>{
+                
+                console.log('data ' , data)
+            }).catch((error)=>{
+                
+                console.log('error ' , error)
+            })
+     
+      this.props.navigation.navigate('Login')
+    })
     .catch(error => console.log(error))  
 
   }

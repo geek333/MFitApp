@@ -1,24 +1,74 @@
 import React from 'react'
-import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
-import styles from './style'
-import Firebase from '../common/constants'
+import { Alert,StyleSheet, Text, TextInput, View, Button , AsyncStorage,Image } from 'react-native'
+import styles from './style';
+import Firebase from '../common/constants';
 
 
 export default class Login extends React.Component {
-  state = { email: '', password: '', errorMessage: null }
-  handleLogin = () => {
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+        myKey: null,
+        email: '',
+        password: '', 
+        errorMessage: null
+    }
+  }
+
+ 
+
+  async storeToken(access_Token)
+  {
+    try{
+         AsyncStorage.setItem("SessionId",access_Token);
+    }
+    catch(error)
+    {
+      console.log(error.message);
+    }
+  }
+
+  async getToken()
+  {
+    try{
+     //let key= await AsyncStorage.getItem("SessionId");
+     const value = await AsyncStorage.getItem("SessionId");
+     this.setState({myKey: value});
+      }
+    catch(error)
+    {
+      console.log(error.message);
+    }
+  }
+
+
+   handleLogin = () => {
 
     const { email, password } = this.state;
   
       
         Firebase.auth()
         .signInWithEmailAndPassword(email, password)
-        .then(() => this.props.navigation.navigate('Loading'))
-        .catch(error => console.log(error))
+        .then(data => {
+         
+          let data1=data.user.uid;
+          console.log("User ID :- ", data.user.uid);
+          this.storeToken(data1);
+          this.getToken();
+          
+         
+          this.props.navigation.navigate('Loading')
+        })
+        .catch(error => Alert.alert("Login",error.message))
   }
   render() {
     return (
       <View style={styles.container}>
+        <Image
+          style={{width: 320, height: 250}}
+          source={require('../images/logo_new2.png')}
+        />
         <Text style={{color:'#e93766', fontSize: 40}}>Login</Text>
         {this.state.errorMessage &&
           <Text style={{ color: 'red' }}>
