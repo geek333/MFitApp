@@ -8,6 +8,7 @@ import Login from './src/screens/Login';
 import Home from './src/screens/Home';
 import Welcome from './src/screens/WelcomeSceenValues'
 import config from './src/common/constants.js';
+import Freedom from './src/screens/FreedomList'
 
 
 const App = createStackNavigator(
@@ -30,7 +31,12 @@ const App = createStackNavigator(
     Welcome :
     {
       screen : Welcome
+    },
+    FreedomList :
+    {
+      screen : Freedom
     }
+
   },
   {
     initialRouteName: 'Login'

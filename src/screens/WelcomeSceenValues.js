@@ -37,7 +37,7 @@ export default class WelcomeScreenValues extends Component {
           textAlign :"left",
           paddingTop:3,
           borderWidth:1,
-          borderBottomColor:'#00000'
+          borderBottomColor:'#000000'
         }}>{item.label}</Text>
       </TouchableOpacity>
      </View>
@@ -64,7 +64,7 @@ export default class WelcomeScreenValues extends Component {
         />
 
                 <View>
-                    <Button title="Next" onPress={()=>this.props.navigation.navigate('Welcome')} color="#e93766"/>
+                    <Button title="Next" onPress={()=>this.props.navigation.navigate('FreedomList')} color="#e93766"/>
               </View>
           <View>
              
