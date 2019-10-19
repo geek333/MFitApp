@@ -10,6 +10,8 @@ import Welcome from './src/screens/WelcomeSceenValues'
 import config from './src/common/constants.js';
 import Freedom from './src/screens/FreedomList'
 
+console.disableYellowBox=true;
+
 
 const App = createStackNavigator(
   {

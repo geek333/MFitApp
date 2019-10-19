@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar, ListView,AsyncStorage } from 'react-native';
-import { Container, Content, Header, Form, Input, Item, Button, Label, Icon, List, ListItem } from 'native-base'
+import { Container, Content, Header, Form, Input, Item, Button, Label, Icon, Footer } from 'native-base'
 import Firebase from '../common/constants'
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 
@@ -39,30 +40,33 @@ export default class Survival extends React.Component {
      }
   }
 
-  componentDidMount() {
-    console.log("called");
-    this.getToken();
-    
+   getItem()
+  { 
     try{
         var that = this
+        
         Firebase.database().ref('Users/'+this.state.myKey+'/survival').on('child_added', function (data) {
-    
-            console.log("------------"+data);
             var newData = [...that.state.listViewData]
-            newData.push(data)
+            newData.push(data.val().name)
             that.setState({ listViewData: newData })
-      
-          })
-    }catch(error)
+    })
+  }catch(error)
     {
         console.log(error)
     }
+
+  }
+  componentDidMount() {
+    console.log("called");
+    this.getToken();
+   this.getItem();
   }
 
   addRow(data) {
     console.log('Users/'+this.state.myKey+'/survival');
     var key = Firebase.database().ref('Users/'+this.state.myKey+'/survival').push().key
     Firebase.database().ref('Users/'+this.state.myKey+'/survival').child(key).set({ name: data })
+    this.getItem();
   }
 
   async deleteRow(secId, rowId, rowMap, data) {
@@ -83,48 +87,44 @@ export default class Survival extends React.Component {
   render() {
     return (
       <Container style={styles.container}>
-        <Header style={{ marginTop: StatusBar.currentHeight }}>
+        
+
+        <Content>
+          <View>
+            <Text style={{fontSize:32,color :'#333333', textAlign : "center"}}>Survival</Text>
+          </View>
+          <View>
+            <Text style = {styles.subheaders}>You like your independenceand control over what you're doing</Text>
+          </View>
+          <View>
+            <Text style = {styles.subheaders}>Write down what you like doing that makes you feel free</Text>
+          </View>
+         <ScrollView  style={{marginTop:25}}>
+         {this.state.listViewData.map((item, key) => (
+           //key is the index of the array
+           //item is the single item of the array
+           <View key={key} style = {styles.item} >
+             <Text style = {styles.textData}>{item}</Text>
+           
+           </View>
+         ))}
+         </ScrollView>
+        </Content>
+
+        <Footer style={{ marginTop: StatusBar.currentHeight }}>
           <Content>
             <Item>
               <Input
-                onChangeText={(newItem) => this.setState({ newItem })}
-                placeholder="Survival "
+                style = {styles.textBox}
+                onChangeText={(newContact) => this.setState({ newContact })}
+                placeholder="Power "
               />
-              <Button onPress={() => this.addRow(this.state.newItem)}>
+              <Button onPress={() => this.addRow(this.state.newContact)}>
                 <Icon name="add" />
               </Button>
             </Item>
           </Content>
-        </Header>
-
-        <Content>
-            
-          <List
-            enableEmptySections
-            dataSource={this.ds.cloneWithRows(this.state.listViewData)}
-            renderRow={data =>
-              <ListItem>
-                <Text> {data.val().name}</Text>
-              </ListItem>
-            }
-            renderLeftHiddenRow={data =>
-              <Button full onPress={() => this.addRow(data)} >
-                <Icon name="information-circle" />
-              </Button>
-            }
-            renderRightHiddenRow={(data, secId, rowId, rowMap) =>
-              <Button full danger onPress={() => this.deleteRow(secId, rowId, rowMap, data)}>
-                <Icon name="trash" />
-              </Button>
-
-            }
-
-            leftOpenValue={-75}
-            rightOpenValue={-75}
-
-          />
-
-        </Content>
+        </Footer>
       </Container>
     );
   }
@@ -136,4 +136,29 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
 
   },
+  item: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      padding: 10,
+      margin: 2,
+      borderColor: '#2a4944',
+      borderWidth: 1,
+      backgroundColor: '#262626',
+      
+   },
+   textData: {
+      color: '#ffffff',
+   },
+   textBox: {
+      color: '#ffffff',
+   },
+   subheaders: {
+      color: '#333333',
+      textAlign : "center",
+      fontSize : 12,
+      paddingTop:3,
+      paddingBottom:3
+
+   }
 });
