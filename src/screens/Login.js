@@ -67,7 +67,7 @@ export default class Login extends React.Component {
       <View style={styles.container}>
         <Image
           style={{width: 320, height: 250}}
-          source={require('../images/logo_new2.png')}
+          source={require('../images/logo_3.jpg')}
         />
         <Text style={{color:'#e93766', fontSize: 40}}>Login</Text>
         {this.state.errorMessage &&

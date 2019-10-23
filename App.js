@@ -9,6 +9,11 @@ import Home from './src/screens/Home';
 import Welcome from './src/screens/WelcomeSceenValues'
 import config from './src/common/constants.js';
 import Freedom from './src/screens/FreedomList'
+import Fun from './src/screens/FunList'
+import Survival from './src/screens/Survival'
+import Love from './src/screens/Love_Belonging'
+import Power from './src/screens/PowerList'
+
 
 console.disableYellowBox=true;
 
@@ -37,6 +42,25 @@ const App = createStackNavigator(
     FreedomList :
     {
       screen : Freedom
+    },
+    Fun :
+    {
+      screen : Fun
+    }
+    ,
+    Survival :
+    {
+      screen : Survival
+    }
+    ,
+    Love :
+    {
+      screen : Love
+    }
+    ,
+    Power :
+    {
+      screen : Power
     }
 
   },
