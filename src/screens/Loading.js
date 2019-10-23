@@ -53,7 +53,7 @@ const DrawerNavigatorExample = createDrawerNavigator({
     //Title
     screen: Gratitude
     },
-    Crisis : {
+    'Crisis 24 Hour Services' : {
         //Title
         screen: CrisisScreen
         },
@@ -69,26 +69,6 @@ const DrawerNavigatorExample = createDrawerNavigator({
             //Title
             screen: LocalEyePeninsulaService
             },
-    Freedom : {
-              //Title
-              screen: Freedom
-              },
-    Power : {
-                //Title
-                screen: Power
-                },
-    Survival : {
-                  //Title
-                  screen: Survival
-                  },
-    Love : {
-                    //Title
-                    screen: LoveBelongings
-                    },
-    Fun : {
-                      //Title
-                      screen: Fun
-                      },
 });
  
 export default createAppContainer(DrawerNavigatorExample);

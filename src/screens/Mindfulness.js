@@ -1,8 +1,9 @@
 import React from 'react'
-import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
-import styles from './style'
-import {Video} from 'expo-av'
-export default class Mindfullness extends React.Component {
+import { StyleSheet, Platform, Image, Text,View, Button , AsyncStorage} from 'react-native'
+import { WebView } from 'react-native';
+import Firebase from '../common/constants';
+
+export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,6 +12,13 @@ export default class Mindfullness extends React.Component {
         userName :'',
     }
   }
+
+
+  /*
+  _fetchData = async () => {
+    this.getToken();
+  }
+  */
 
  componentDidMount()
  {
@@ -35,15 +43,11 @@ return (
       
       <View style={styles.container}>
       <Text style={{color:'#000000', fontSize: 30}}>
-          Welcome to 
-        </Text>
-
-        <Text style={{color:'#000000', fontSize: 30}}>
-          Mentally Fit EP - { }
+          Mindfulness
         </Text>
         <View  style={{height:'60%',width:'80%'}}>
         <WebView
-        source={{ uri: 'https://youtu.be/wnHW6o8WMas' }}
+        source={{ uri: 'https://youtu.be/6p_yaNFSYao' }}
         style={{ marginTop: 20 }}
         scalesPageToFit={true}
                startInLoadingState={true}
@@ -54,8 +58,27 @@ return (
                     mixedContentMode='always'
       />
         </View>
-        <Button title="Next" onPress={()=>this.props.navigation.navigate('Welcome')} color="#e93766"/>
+        
         </View>
     )
   }
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
+  backgroundVideo: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
+  WebViewContainer: {
+ 
+    marginTop: 20,
+    backgroundColor: '#ecf0f1'
+  }
+})

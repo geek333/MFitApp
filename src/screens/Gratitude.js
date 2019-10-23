@@ -1,22 +1,25 @@
 import React from 'react';
-import { Button, Image, View, Alert, Text, ListView } from 'react-native';
+import { Button, Image, View, Alert, Text, ScrollView } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 import * as firebase from 'firebase';
 require("json-circular-stringify");
 
+var data = []
+
 export default class Gratitude extends React.Component {
 
 state = {
     image: null,
-    testurl: null,
+    urls: data,
+    firebasePath: null,
   };
 
   render() {
     let { image } = this.state;
-    let { testurl } = this.state;
-
+    var imagePath = 'https://facebook.github.io/react-native/docs/assets/favicon.png';
+    
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text style={{color:'#000000', fontSize: 24}}>
@@ -25,34 +28,44 @@ state = {
         <Text style={{color:'#000000', fontSize: 24}}>
           Photos
         </Text>    
-        <View style={{ alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
-        
-         
-        <Image source={{uri: testurl}} style={{width:70, height:70}}/>
-        <Image source={require('../images/drawer.png')} style={{width:70, height:70}}/>
-        <Image source={require('../images/drawer.png')} style={{width:70, height:70}}/>
-        </View>
-        <View style={{ alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
-        <Image source={require('../images/drawer.png')} style={{width:70, height:70}}/>
-        <Image source={require('../images/drawer.png')} style={{width:70, height:70}}/>
-        <Image source={require('../images/drawer.png')} style={{width:70, height:70}}/>
-        </View>
 
-        <Image source={require('../images/drawer.png')} style={{width:40, height:40, justifyContent: 'flex-end', alignItems:'flex-end'}} 
-          onPress={this._pickImage}/>
-         <Button
-          title="Pick an image from camera roll"
+        <ScrollView style={{marginTop: 20}}
+        horizontal= {true}
+        decelerationRate={0}
+        snapToAlignment={"center"}
+        >
+          {this.state.urls.map((item, key) => (
+            //key is the index of the array 
+            //item is the single item of the array
+            <View key={key} >
+              <Image
+          style={{ width: 150, height: 150, alignItems: 'center', justifyContent: 'center', margin: 10}}
+          source={this.getSource(item)}
+        />
+            </View>
+          ))}
+        </ScrollView>
+        
+        <Button style={{marginBottom: 40}}
+          title="Share your happiness with us"
           onPress={this._pickImage}
         />
-        {image &&
-          <Image source={{uri: image}} style={{ width: 200, height: 200 }} />}
+         
       </View>
     );
   }
 
   componentDidMount() {
     this.getPermissionAsync();
-    this.showimage();
+    if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+    
+    this.showimage() 
+  }
+
+  getSource(item) {
+    console.log("..image path::"+item)
+
+    return { uri: item};
   }
 
   uploadImage = async (uri, imageName) => {
@@ -74,7 +87,8 @@ state = {
     const blob = await response.blob();
 
     var ref = firebase.storage().ref().child("images/" + imageName);
-    // console.log(ref.getDownloadURL());
+    console.log(ref.getDownloadURL());
+    
     return ref.put(blob);
   }
 
@@ -87,8 +101,6 @@ state = {
     }
   }
 
-
-
   _pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -96,67 +108,52 @@ state = {
       aspect: [4, 3],
     });
 
-     console.log(result);
-     var filename = result.uri.replace(/^.*[\\\/]/, '');
-     console.log(filename)
+    console.log(result);
 
     if (!result.cancelled) {
       this.setState({ image: result.uri });
-      this.uploadImage(result.uri, filename)
+      this.uploadImage(result.uri, 'test-image')
         .then(() => {
           Alert.alert("Image uploaded successfully!!");
-          // console.log(this.state.url);
           this.showimage();
-          // console.log(this.state.url);
         })
         .catch((error) => {
           Alert.alert(error.message);
         });
     }
     }
-  
-    displayImage(imageRef) {
-  imageRef.getDownloadURL().then((url) => {
-    // TODO: Display the image on the UI
-    console.log(url)
-  });
-}
 
-  showimage = async () => {
+    showimage = async () => {
     console.log("show image called")
     let ref = firebase.storage().ref('/images');
+    this.state.firebasePath = firebase.storage().ref()
     const results = await ref.listAll()
     // this.setState({testurl: url});
-    //const data = JSON.stringify(results)
-    console.log(results.items.location.val().path_)
-     
+    const data = JSON.stringify(results)
+    var that = this
+    var url = []
+    //console.log(data)
+    
+    var storageRef = firebase.storage().ref();
+    for(i in results.items) {
+      console.log(results.items[i].location.path_)
+      var path = this.state.firebasePath + results.items[i].location.path_
+      //this.getUrl(path)
+      var spaceRef = await storageRef.child(results.items[i].location.path_);
+         storageRef.child(results.items[i].location.path_).getDownloadURL().then(function(downloadUrl) {
+             
+             console.log("download::"+downloadUrl)
+             url.push(downloadUrl)
+              that.setState({urls: url})
 
-    
-  
-   .then((url) => {
-    //this.state({testurl.push(url)})
-    
-       // this.setState({testurl: url});
-       //console.log(url);
-   });
+         }).catch(function(error) {
+
+         });
+      
+    }
+
+    console.log("..."+that.state.urls)
   }
 
+
   };
-
-  // this.showimage();
-
-// function showimage() {
-
-//          var storageRef = firebase.storage().ref();
-//          var spaceRef = storageRef.child('images/test-image');
-//          storageRef.child('images/test-image').getDownloadURL().then(function(url) {
-//              var test = url;
-//              console.log(test);
-//              Alert.alert(url);
-//              this.setState({url: url});
-
-//          }).catch(function(error) {
-//               Alert.alert(error.message);
-//          });
-
-//      }
