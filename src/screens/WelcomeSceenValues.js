@@ -54,7 +54,7 @@ export default class WelcomeScreenValues extends Component {
         <View> 
           <Text style={{fontSize:14 , textAlign:"center"}}>Think about what is more important to you and order the items from most to less important</Text>
         </View>
-        
+        <View>
         <DraggableFlatList
           data={this.state.data}
           renderItem={this.renderItem}
@@ -62,9 +62,9 @@ export default class WelcomeScreenValues extends Component {
           scrollPercent={5}
           onMoveEnd={({ data }) => this.setState({ data })}
         />
-
-                <View>
-                    <Button title="Next" onPress={()=>this.props.navigation.navigate('FreedomList')} color="#e93766"/>
+        </View>
+       <View>
+                  <Button title="Next" onPress={()=>this.props.navigation.navigate('FreedomList')} color="#e93766"/>
               </View>
           <View>
              

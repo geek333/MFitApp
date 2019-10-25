@@ -11,11 +11,9 @@ import Gratitude from './Gratitude';
 import Mindfullness from './Mindfulness';
 import MyValues from './MyValues';
 import LocalEyePeninsulaService from './LocalEyePeninsulaServices';
-import Freedom from './FreedomList'
-import Power from './PowerList'
-import Fun from './FunList'
-import LoveBelongings from './Love_Belonging'
-import Survival from './Survival'
+import Reflection from './Reflection'
+import Profile from './Profile'
+
 
 
 
@@ -49,6 +47,9 @@ const DrawerNavigatorExample = createDrawerNavigator({
     //Title
     screen: HomeScreen
   },
+  Profile : {
+    screen : Profile
+  },
   Gratitude : {
     //Title
     screen: Gratitude
@@ -69,6 +70,10 @@ const DrawerNavigatorExample = createDrawerNavigator({
             //Title
             screen: LocalEyePeninsulaService
             },
+    Reflection :
+    {
+      screen : Reflection
+    }
 });
  
 export default createAppContainer(DrawerNavigatorExample);
