@@ -5,13 +5,15 @@ import Firebase from '../common/constants'
 
 
 export default class signUp extends React.Component {npm 
-  state = { email: '', password: '',name:'', errorMessage: null }
+  state = { email: '', dob:'', gender :'', password: '',name:'', errorMessage: null }
 
   handleSignUp = () => {
 
     emailId = this.state.email;
     pass = this.state.password;
     name = this.state.name;
+    dob = this.state.dob;
+    gender = this.state.gender;
 
     Firebase.auth()
     .createUserWithEmailAndPassword(emailId, pass)
@@ -21,6 +23,8 @@ export default class signUp extends React.Component {npm
       Firebase.database().ref('Users/'+userId).set({
         email : emailId,
         uname : name,
+        dateOfBirth : dob,
+        Gender : gender
          }).then((data)=>{
                 
                 console.log('data ' , data)
