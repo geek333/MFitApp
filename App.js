@@ -13,7 +13,8 @@ import Fun from './src/screens/FunList'
 import Survival from './src/screens/Survival'
 import Love from './src/screens/Love_Belonging'
 import Power from './src/screens/PowerList'
-
+import WelcomeValues from './src/screens/WelcomeValues'
+import WelcomeResults from './src/screens/WelcomeResults'
 
 console.disableYellowBox=true;
 
@@ -61,7 +62,15 @@ const App = createStackNavigator(
     Power :
     {
       screen : Power
-    }
+    },
+    WelcomeValues :
+    {
+      screen : WelcomeValues
+    },
+    WelcomeResults :
+    {
+      screen : WelcomeResults
+    },
 
   },
   {

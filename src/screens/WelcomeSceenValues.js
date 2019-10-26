@@ -18,26 +18,25 @@ export default class WelcomeScreenValues extends Component {
       <View>
           <TouchableOpacity
         style={{ 
-          height: 60, 
-          backgroundColor: isActive ? '#0099cc' : '#ffffff',
+          height: 45, 
+          backgroundColor: isActive ? '#0099cc' : '#262626',
           alignItems:"stretch",
           justifyContent: 'center',
           paddingTop:3,
           borderColor : '#ffffff',
           alignSelf : "stretch",
-          width:320
+          width:320,
+          margin : 2
         }}
         onLongPress={move}
         onPressOut={moveEnd}
       >
         <Text style={{ 
           fontWeight: 'bold', 
-          color: '#000000',
-          fontSize:14,
-          textAlign :"left",
-          paddingTop:3,
-          borderWidth:1,
-          borderBottomColor:'#000000'
+          color: '#ffffff',
+          fontSize:12,
+          textAlign :"center",
+          paddingTop:3
         }}>{item.label}</Text>
       </TouchableOpacity>
      </View>
@@ -48,28 +47,25 @@ export default class WelcomeScreenValues extends Component {
     return (
       <View style={styles.container}>
         
-        <View> 
-          <Text style={{fontSize:32}}>Your Values</Text>
-        </View>
-        <View> 
-          <Text style={{fontSize:14 , textAlign:"center"}}>Think about what is more important to you and order the items from most to less important</Text>
-        </View>
-        <View>
-        <DraggableFlatList
-          data={this.state.data}
-          renderItem={this.renderItem}
-          keyExtractor={(item, index) => `draggable-item-${item.key}`}
-          scrollPercent={5}
-          onMoveEnd={({ data }) => this.setState({ data })}
-        />
-        </View>
-       <View>
-                  <Button title="Next" onPress={()=>this.props.navigation.navigate('FreedomList')} color="#e93766"/>
-              </View>
-          <View>
-             
-          
-        </View>
+            <View> 
+              <Text style={{fontSize:32}}>Your Values</Text>
+            </View>
+
+            <View> 
+              <Text style={{fontSize:14 , textAlign:"center"}}>Think about what is more important to you and order the items from most to less important</Text>
+            </View>
+
+            
+              <DraggableFlatList
+                data={this.state.data}
+                renderItem={this.renderItem}
+                keyExtractor={(item, index) => `draggable-item-${item.key}`}
+                scrollPercent={5}
+                onMoveEnd={({ data }) => this.setState({ data })}
+              />
+
+              <Button style={{ paddingTop : -60 }} title="Next" onPress={()=>this.props.navigation.navigate('WelcomeValues',{data: this.state.data, })} color="#e93766"/>
+              
       </View>
       
     )
