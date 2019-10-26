@@ -15,6 +15,8 @@ import Love from './src/screens/Love_Belonging'
 import Power from './src/screens/PowerList'
 import WelcomeValues from './src/screens/WelcomeValues'
 import WelcomeResults from './src/screens/WelcomeResults'
+import ReflectionList from './src/screens/ReflectionList'
+import ReflectionThought from './src/screens/ReflectionThought'
 
 console.disableYellowBox=true;
 
@@ -71,6 +73,14 @@ const App = createStackNavigator(
     {
       screen : WelcomeResults
     },
+    ReflectionList :
+    {
+      screen : ReflectionList
+    },
+    ReflectionThought :
+    {
+      screen : ReflectionThought
+    }
 
   },
   {

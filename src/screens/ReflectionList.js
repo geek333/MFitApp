@@ -89,31 +89,24 @@ export default class Login extends React.Component {
     justifyContent: 'center',
     alignItems: 'center', //changed value of alignItems
    }}>
-     <TouchableOpacity onPress={()=>this.props.navigation.navigate('ReflectionThought',{data: "Bad", })}>
+     <TouchableOpacity onPress={()=>this.props.navigation.navigate('WelcomeValues',{data: "Bad", })}>
         <Image
           style={{width: 90, height: 90}}
           source={require('../images/bad.jpg')}
         />
       </TouchableOpacity>
-      <TouchableOpacity onPress={()=>this.props.navigation.navigate('ReflectionThought',{data: "OK", })}>
          <Image
           style={{width: 90, height: 90}}
           source={require('../images/ok.jpg')}
         />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={()=>this.props.navigation.navigate('ReflectionThought',{data: "Good", })}>
          <Image
           style={{width: 90, height: 90}}
           source={require('../images/good.jpg')}
         />
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={()=>this.props.navigation.navigate('ReflectionThought',{data: "Great", })}>
          <Image
           style={{width: 90, height: 90}}
           source={require('../images/great.jpg')}
         />
-        </TouchableOpacity>
       </View>
 
       </View>
