@@ -53,15 +53,16 @@ export default class Login extends React.Component {
     flex: 1,
     }}>
 
-    <View>
-        <Text style={{color:'#000000', fontSize: 24}}>
+    <View style={{justifyContent : 'center', marginTop :15}}>
+        <Text style={{color:'#000000', fontSize: 24, flexDirection:'column' , textAlign : "center",}}>
           Reflection
         </Text> 
-         <Text style={{color:'#000000', fontSize: 18}}>
+         <Text style={{color:'#000000', fontSize: 18 , flexDirection:'column',  textAlign : "center",marginTop :55}}>
           How are you ??
         </Text> 
      </View>
       <View style={{
+        marginTop :30,
     flexDirection:'row',
     justifyContent: 'center',
     alignItems: 'center', //changed value of alignItems
@@ -82,6 +83,7 @@ export default class Login extends React.Component {
      </View>
 
       <View style={{
+        marginTop : 60,
     flexDirection:'row',
     justifyContent: 'center',
     alignItems: 'center', //changed value of alignItems
