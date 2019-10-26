@@ -3,14 +3,14 @@ import firebase from 'firebase';
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyC7Xn9kxFAd-0qFRoRbuczWVPVgYd_AadM",
-    authDomain: "mfitapp-7f639.firebaseapp.com",
-    databaseURL: "https://mfitapp-7f639.firebaseio.com",
-    projectId: "mfitapp-7f639",
-    storageBucket: "mfitapp-7f639.appspot.com",
-    messagingSenderId: "940699961246",
-    appId: "1:940699961246:web:9ba602fb588625817cf88f",
-    measurementId: "G-GE1TQTVV4Y"
+  apiKey: "AIzaSyDlEE81gw87MrdpJjWMVd4OBFM-wmq1bmw",
+  authDomain: "mfit-22da1.firebaseapp.com",
+  databaseURL: "https://mfit-22da1.firebaseio.com",
+  projectId: "mfit-22da1",
+  storageBucket: "mfit-22da1.appspot.com",
+  messagingSenderId: "647289255987",
+  appId: "1:647289255987:web:1f619170c32f0ef4ac8b46",
+  measurementId: "G-98GCF1005V"
   };
 
 
