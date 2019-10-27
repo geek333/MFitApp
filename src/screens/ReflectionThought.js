@@ -55,6 +55,7 @@ export default class Login extends React.Component {
     var key = Firebase.database().ref('Users/'+this.state.myKey+'/reflection').push().key
     Firebase.database().ref('Users/'+this.state.myKey+'/reflection').child(key).set({ Mood : mood , Date : dateData , Time : time , Selection : selection , Text : data})
     
+    this.props.navigation.navigate('ReflectionList')
   }
 
   componentDidMount() {
@@ -104,6 +105,7 @@ const styles = StyleSheet.create({
     textarea: {
       textAlignVertical: 'bottom',  // hack android
       width : 320,
+      height : 100,
       fontSize: 14,
       color: '#333',
       borderColor:'#000000',
