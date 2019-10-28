@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, ListView,AsyncStorage,Button, } from 'react-native';
-import { Container, Content, Header, Form, Input, Item, Label, Icon, Footer } from 'native-base'
+import { StyleSheet,Button, Text, View, StatusBar, ListView,AsyncStorage, } from 'react-native';
 import Firebase from '../common/constants'
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -82,37 +81,38 @@ export default class PowerList extends React.Component {
 
   render() {
     return (
-      <Container style={styles.container}>
+      <View style={styles.container}>
         
 
-        <Content>
-          <View>
-            <Text style={{fontSize:32,color :'#333333', textAlign : "center"}}>Reflection</Text>
-          </View>
-          <View>
-            <Text style = {styles.subheaders}>Activities </Text>
-          </View>
-          
-         <ScrollView  style={{marginTop:25}}>
-         {this.state.listViewData.map((item, key) => (
-           //key is the index of the array
-           //item is the single item of the array
-           <View key={key} style = {styles.item} >
-             <Text style = {styles.textData}>{item}</Text>
-           
-           </View>
-         ))}
-         </ScrollView>
-        </Content>
-        <View>
+        
+            <View>
+              <Text style={{fontSize:32,color :'#333333', textAlign : "center"}}>Reflection</Text>
+            </View>
+
+            <View>
+              <Text style = {styles.subheaders}>Activities </Text>
+            </View>
+            <View>
+                <ScrollView  style={{marginTop:25 , height : 400}}>
+                {this.state.listViewData.map((item, key) => (
+                  //key is the index of the array
+                  //item is the single item of the array
+                  <View key={key} style = {styles.item} >
+                    <Text style = {styles.textData}>{item}</Text>
+                  
+                  </View>
+                ))}
+                 </ScrollView>
+        </View>
+        <View style={{width:'100%'}}>
             
-            <Button onPress={()=>this.getItem()} style={{color:'#005ce6', fontSize: 18 ,textAlign: "center",marginBottom:15}} title="Refresh List"/>
-            <Button onPress={()=>this.props.navigation.navigate('Home')} style={{ paddingLeft:15}} title="Home"/>
+            <Button  style={{color:'#005ce6', width :'40%'}} title="Refresh List" onPress={()=>this.getItem()}/>
+            <Button  style={{ color:'#005ce6', width :'40%'}} title="Home" onPress={()=>this.props.navigation.navigate(' Go To Home')}/>
             
         </View>
 
        
-      </Container>
+      </View>
     );
   }
 }

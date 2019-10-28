@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, ListView,AsyncStorage } from 'react-native';
-import { Container, Content, Header, Form, Input, Item, Button, Label, Icon, Footer } from 'native-base'
+import { StyleSheet, Text, View, StatusBar, ListView,AsyncStorage ,Button } from 'react-native';
+import { Container, Content, Header, Form, Input, Item, Label, Icon, Footer } from 'native-base'
 import Firebase from '../common/constants'
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -73,10 +73,10 @@ export default class WelcomeValues extends React.Component {
 
   render() {
     return (
-      <Container style={styles.container}>
+      <View style={styles.container}>
         
 
-        <Content>
+        <View>
           <View>
             <Text style={{fontSize:32,color :'#333333', textAlign : "center"}}>Your Values</Text>
           </View>
@@ -94,12 +94,12 @@ export default class WelcomeValues extends React.Component {
          ))}
          </ScrollView>
         
-        </Content>
-        <View>
-        <Button style={{width:200 , height :45 , color : '#ffffff', backgroundColor :'e93766'}} title="Go To Home" onPress={()=>this.props.navigation.navigate('Home')}/>
+         </View>
+        <View style={{width:'100%',alignItems:"center",marginTop:40}}>
+         <Button style={{color : '#e93766', marginBottom : 40 ,alignItems : "center"}} title="Go To Home" onPress={()=>this.props.navigation.navigate('Home')}/>
             
         </View>
-      </Container>
+      </View>
     );
   }
 }
