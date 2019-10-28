@@ -29,10 +29,9 @@ state = {
           Photos
         </Text>    
 
+        <View style={{height: 200}}>  
         <ScrollView style={{marginTop: 20}}
         horizontal= {true}
-        decelerationRate={0}
-        snapToAlignment={"center"}
         >
           {this.state.urls.map((item, key) => (
             //key is the index of the array 
@@ -45,8 +44,8 @@ state = {
             </View>
           ))}
         </ScrollView>
-        
-        <Button style={{marginBottom: 40}}
+        </View>
+        <Button color="#e93766" style={{marginBottom: 40}}
           title="Share your happiness with us"
           onPress={this._pickImage}
         />
@@ -87,7 +86,6 @@ state = {
     const blob = await response.blob();
 
     var ref = firebase.storage().ref().child("images/" + imageName);
-    console.log(ref.getDownloadURL());
     
     return ref.put(blob);
   }
@@ -110,9 +108,15 @@ state = {
 
     console.log(result);
 
+    var path = result.uri;
+    var filename = path.match(/.*\/([^/]+)\.([^?]+)/i)[1];
+    //filename = filename+".png"
+    //console.log("image name:"+filename)
+
+
     if (!result.cancelled) {
       this.setState({ image: result.uri });
-      this.uploadImage(result.uri, 'test-image')
+      this.uploadImage(result.uri, filename)
         .then(() => {
           Alert.alert("Image uploaded successfully!!");
           this.showimage();
@@ -147,7 +151,7 @@ state = {
               that.setState({urls: url})
 
          }).catch(function(error) {
-
+            console.log("error::"+error.message)
          });
       
     }

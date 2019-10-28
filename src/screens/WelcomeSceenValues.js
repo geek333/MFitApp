@@ -54,18 +54,23 @@ export default class WelcomeScreenValues extends Component {
             <View> 
               <Text style={{fontSize:14 , textAlign:"center"}}>Think about what is more important to you and order the items from most to less important</Text>
             </View>
-
-            
-              <DraggableFlatList
+            <View style={{height : 400}}>
+            <DraggableFlatList
                 data={this.state.data}
                 renderItem={this.renderItem}
                 keyExtractor={(item, index) => `draggable-item-${item.key}`}
                 scrollPercent={5}
                 onMoveEnd={({ data }) => this.setState({ data })}
               />
+            </View>
+            
+             <View>
 
-              <Button style={{ paddingTop : -60 }} title="Next" onPress={()=>this.props.navigation.navigate('WelcomeValues',{data: this.state.data, })} color="#e93766"/>
+             <Button style={{ color : '#e93766', marginBottom : 40 ,alignItems : "center"}} title="Next" onPress={()=>this.props.navigation.navigate('WelcomeValues',{data: this.state.data, })} color="#e93766"/>
               
+             </View>
+
+             
       </View>
       
     )

@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, ListView,AsyncStorage } from 'react-native';
-import { Container, Content, Header, Form, Input, Item, Button, Label, Icon, Footer } from 'native-base'
+import { StyleSheet, Text,Button,View, StatusBar, ListView, AsyncStorage  } from 'react-native';
+import { Container, Content, Header, Form, Input, Item, Label, Icon, Footer } from 'native-base'
 import Firebase from '../common/constants'
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -70,17 +70,16 @@ export default class WelcomeValues extends React.Component {
 
   render() {
     return (
-      <Container style={styles.container}>
-        
-
-        <Content>
+      <View style={styles.container}>
+     
           <View>
             <Text style={{fontSize:32,color :'#333333', textAlign : "center"}}>Your Values</Text>
           </View>
           <View>
             <Text style = {styles.subheaders}>Results</Text>
           </View>
-         <ScrollView  style={{marginTop:25 , marginBottom:25 , }}>
+          <View style={{height: 300}}>
+          <ScrollView  style={{marginTop:25 , marginBottom:25 , }}>
          {this.state.listViewData.map((item, key) => (
            //key is the index of the array
            //item is the single item of the array
@@ -90,15 +89,15 @@ export default class WelcomeValues extends React.Component {
            </View>
          ))}
          </ScrollView>
-        
-             
-        </Content>
-        <View>
-         <Button style={{width:200 , height :45 , color : '#e93766', marginBottom : 10 ,alignItems : "center"}} title="Next" onPress={()=>this.props.navigation.navigate('WelcomeResults',{data: this.state.listViewData, })}/>
+
+          </View>
+
+        <View style={{width:'100%',alignItems:"center",}}>
+         <Button style={{color : '#e93766', marginBottom : 40 ,alignItems : "center"}} title="Next" onPress={()=>this.props.navigation.navigate('WelcomeResults',{data: this.state.listViewData, })}/>
              
          </View>
-      </Container>
-    );
+      </View>  
+        );
   }
 }
 
