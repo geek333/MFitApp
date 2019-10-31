@@ -117,7 +117,7 @@ export default class Survival extends React.Component {
               <Input
                 style = {styles.textBox}
                 onChangeText={(newContact) => this.setState({ newContact })}
-                placeholder="Power "
+                placeholder="Survival "
               />
               <Button onPress={() => this.addRow(this.state.newContact)}>
                 <Icon name="add" />

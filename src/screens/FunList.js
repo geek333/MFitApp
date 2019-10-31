@@ -118,7 +118,7 @@ export default class FunList extends React.Component {
               <Input
                 style = {styles.textBox}
                 onChangeText={(newContact) => this.setState({ newContact })}
-                placeholder="Power "
+                placeholder="Fun "
               />
               <Button onPress={() => this.addRow(this.state.newContact)}>
                 <Icon name="add" />
